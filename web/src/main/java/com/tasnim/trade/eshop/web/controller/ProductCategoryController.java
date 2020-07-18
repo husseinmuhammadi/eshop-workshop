@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -127,6 +126,18 @@ public class ProductCategoryController {
         LOGGER.info("Remove entity id: {}", id);
         service.delete(id);
         return "redirect:/productCategory/list";
+    }
+
+    @GetMapping("/fragment/list")
+    public String products(Model model) {
+        List<ProductCategory> productCategories = service.findAll();
+        model.addAttribute("productCategories", productCategories);
+        return "fragments/product-category :: categories";
+    }
+
+    @GetMapping("/profile1")
+    public String products1() {
+        return "product-category/profile1";
     }
 }
 

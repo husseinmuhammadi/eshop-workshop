@@ -2,6 +2,7 @@ package com.tasnim.trade.eshop.web.controller;
 
 import com.tasnim.trade.eshop.api.ProductService;
 import com.tasnim.trade.eshop.dto.Product;
+import com.tasnim.trade.eshop.dto.ProductCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,11 @@ public class ProductController {
         LOGGER.info("Remove entity entity-id: {}", product.getId());
         service.delete(product);
         return "redirect:/product/list";
+    }
+
+    @GetMapping("/fragment/list")
+    public String all(Model model, @RequestParam("productCategoryId") Optional<Long> categoryId) {
+        categoryId.ifPresent(id -> model.addAttribute("products", service.findAllByCategory(new ProductCategory(id))));
+        return "fragments/product-list :: all";
     }
 }
