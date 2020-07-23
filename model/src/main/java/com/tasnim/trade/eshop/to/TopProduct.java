@@ -1,20 +1,19 @@
 package com.tasnim.trade.eshop.to;
 
-import sun.security.krb5.internal.LastReq;
-
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "TOP_PRODUCT")
 @SequenceGenerator(name = "SEQUENCE_GENERATOR", sequenceName = "TOP_PRODUCT_SEQ")
 public class TopProduct extends EntityBase {
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID", foreignKey = @ForeignKey(name = "FK_PRODUCT_TOP_PRODUCT"))
     Product product;
 
-    @Column(name = "start_Date", nullable = false)
+    @Column(name = "START_DATE", nullable = false)
     Date startDate;
 
-    @Column(name = "end_Date", nullable = false)
+    @Column(name = "END_DATE", nullable = false)
     Date endDate;
 
     public Product getProduct() {
