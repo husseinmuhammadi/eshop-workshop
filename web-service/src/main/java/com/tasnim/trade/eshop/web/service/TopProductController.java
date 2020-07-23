@@ -9,18 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-
 public class TopProductController {
 
     @Autowired
-   TopProductService topProductService;
-
+    TopProductService topProductService;
 
     @PostMapping("/api/v1/top-products")
-    public ResponseEntity<TopProduct> save(@RequestBody TopProduct topProduct)
-    {
-
-
+    public ResponseEntity<TopProduct> save(@RequestBody TopProduct topProduct) {
         return ResponseEntity.ok(topProductService.save(topProduct));
     }
 }
