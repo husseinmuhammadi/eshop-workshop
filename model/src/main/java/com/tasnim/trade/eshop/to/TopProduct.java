@@ -3,7 +3,8 @@ package com.tasnim.trade.eshop.to;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity(name = "TOP_PRODUCT")
+@Entity()
+@Table(name = "TOP_PRODUCT")
 @SequenceGenerator(name = "SEQUENCE_GENERATOR", sequenceName = "TOP_PRODUCT_SEQ")
 public class TopProduct extends EntityBase {
     @ManyToOne(fetch = FetchType.LAZY)
