@@ -2,6 +2,13 @@ package com.tasnim.trade.eshop.dto;
 
 public class Product extends DtoBase {
 
+    public Product() {
+    }
+
+    public Product(Long id) {
+        super(id);
+    }
+
     private String productName;
 
     private String productCode;
