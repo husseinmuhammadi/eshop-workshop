@@ -14,7 +14,7 @@ public class TopProductController {
     @Autowired
     TopProductService topProductService;
 
-    @PostMapping("/api/v1/top-products")
+    @PostMapping("/api/v1/admin/top-products")
     public ResponseEntity<TopProduct> save(@RequestBody TopProduct topProduct) {
         return ResponseEntity.ok(topProductService.save(topProduct));
     }

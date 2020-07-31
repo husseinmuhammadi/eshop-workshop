@@ -17,6 +17,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -30,26 +37,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        LOGGER.info("Getting token from URI: {}", request.getRequestURI());
-        String contextPath = request.getContextPath();
-        try {
-            if (request.getRequestURI().startsWith(contextPath + "/api")) {
-                setAuthenticationBasedOnToken(request);
-            }
-        }catch (Exception ignored){
-
-        }
-        filterChain.doFilter(request, response);
-    }
-
-    private void setAuthenticationBasedOnToken(HttpServletRequest request) {
-
         String username = null;
         String jwtToken = null;
 
         // JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
+        dump(request);
         final String requestTokenHeader = request.getHeader("Authorization");
-        LOGGER.info("Authorization: {}", requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
@@ -82,5 +75,36 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
+        filterChain.doFilter(request, response);
+    }
+
+    private synchronized void dump(HttpServletRequest request) {
+        LOGGER.info("----------------------------------------------------");
+        LOGGER.info("requestURI: {}", request.getRequestURI());
+        enumerationAsStream(request.getHeaderNames()).forEach(header -> {
+            LOGGER.info("{}: {}", header, request.getHeader(header));
+        });
+        LOGGER.info("----------------------------------------------------");
+    }
+
+    public static <T> void forEachRemaining(Enumeration<T> e, Consumer<? super T> c) {
+        while (e.hasMoreElements()) c.accept(e.nextElement());
+    }
+
+    public static <T> Stream<T> enumerationAsStream(Enumeration<T> e) {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(
+                        new Iterator<T>() {
+                            public T next() {
+                                return e.nextElement();
+                            }
+
+                            public boolean hasNext() {
+                                return e.hasMoreElements();
+                            }
+                        },
+                        Spliterator.ORDERED
+                ), false
+        );
     }
 }
