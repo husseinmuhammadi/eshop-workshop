@@ -8,8 +8,13 @@
 <body>
 <th:block th:replace="fragments/header::header"/>
 <div class="container">
+    <div>
     <a th:href="@{/product/list}" class="badge badge-primary">Product List</a>
     <a th:href="@{/product/entry}" class="badge badge-secondary">Add New Product</a>
+    </div>
+    <a th:href="@{/productCategory/list}" class="badge badge-primary">Product Category List</a>
+    <a th:href="@{/productCategory/profile}" class="badge badge-secondary">Product Category Profile (HTML)</a>
+    <a th:href="@{/productCategory/profile1}" class="badge badge-primary">Product Category Profile (jQuery)</a>
 </div>
 <th:block th:replace="fragments/footer::footer"/>
 </body>
