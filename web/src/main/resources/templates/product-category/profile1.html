@@ -33,7 +33,7 @@
     });
 
     function select(productCategoryId) {
-        var url = '/product/fragment/list';
+        var url = '/product/fragment/list/category';
         url = url + '?productCategoryId=' + productCategoryId;
         $('#products').load(url);
     }

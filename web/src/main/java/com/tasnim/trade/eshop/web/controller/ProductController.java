@@ -80,9 +80,27 @@ public class ProductController {
         return "redirect:/product/list";
     }
 
-    @GetMapping("/fragment/list")
-    public String all(Model model, @RequestParam("productCategoryId") Optional<Long> categoryId) {
+    @GetMapping("/fragment/list/category")
+    public String findAllByCategory(Model model, @RequestParam("productCategoryId") Optional<Long> categoryId) {
         categoryId.ifPresent(id -> model.addAttribute("products", service.findAllByCategory(new ProductCategory(id))));
         return "fragments/product-list :: all";
+    }
+
+    @GetMapping("/fragment/list")
+    public String all(Model model) {
+        model.addAttribute("products", service.findAll());
+        return "fragments/product-modal :: product-select";
+    }
+
+    @GetMapping("/profile/{id}")
+    public String profile(Model model, @PathVariable Long id) {
+        Optional<Product> optional = service.findById(id);
+        optional.ifPresentOrElse(product -> model.addAttribute("product", product), new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+        return "product/profile";
     }
 }
