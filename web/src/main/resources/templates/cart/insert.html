@@ -9,27 +9,25 @@
 <div th:replace="fragments/header::header"></div>
 <div class="container">
     <h1>Card Entry</h1>
-    <form th:action="@{/}">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">@example.com</span>
-            </div>
+    <form th:action="@{/}" th:object="${cart}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" aria-describedby="username-description" placeholder="Username" th:field="*{user.username}">
+            <small id="username-description" class="form-text text-muted">
+                Username is prepared from login user information
+            </small>
         </div>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control">
-            <div class="input-group-append">
-
+        <div class="form-group">
+            <label for="product-id">Product</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="product-id" aria-describedby="product-description" placeholder="Product">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="openModal(this)" data-toggle="modal" data-target="#exampleModal">Select</button>
+                </div>
             </div>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Product</span>
-            </div>
-            <input type="text" id="product-id" aria-label="Product Id" class="form-control">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" onclick="openModal(this)" data-toggle="modal" data-target="#exampleModal">Select</button>
-            </div>
+            <small id="product-description" class="form-text text-muted">
+                Select a product
+            </small>
         </div>
     </form>
 
