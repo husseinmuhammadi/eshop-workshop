@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/cart")
@@ -27,9 +28,17 @@ public class CartController {
         return "cart/insert";
     }
 
-    @PostMapping("/save")
-    public String add(Cart cart) {
-        return "cart/insert";
+//    @PostMapping(value = "/save", params = "action=save")
+    @PostMapping(value = "/save")
+    public String add(Cart cart, @RequestParam(value="action") String action) {
+
+        return "card/index";
+    }
+
+    @PostMapping(value = "/save", params = "action=cancel")
+    public String cancel(Cart cart) {
+
+        return "card/index";
     }
 
     private String getLoggedInUser() {

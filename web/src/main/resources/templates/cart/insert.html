@@ -8,8 +8,8 @@
 <body>
 <div th:replace="fragments/header::header"></div>
 <div class="container">
-    <h1>Card Entry</h1>
-    <form th:action="@{/}" th:object="${cart}">
+    <h1>Cart Entry</h1>
+    <form th:action="@{/cart/save}" th:object="${cart}" method="post">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" aria-describedby="username-description" placeholder="Username" th:field="*{user.username}">
@@ -22,12 +22,15 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="product-id" aria-describedby="product-description" placeholder="Product">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" onclick="openModal(this)" data-toggle="modal" data-target="#exampleModal">Select</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="openModal(this)" data-toggle="modal" data-target="#exampleModal">Select</button>
                 </div>
             </div>
             <small id="product-description" class="form-text text-muted">
                 Select a product
             </small>
+        </div>
+        <div role="group">
+            <button type="submit" class="btn btn-primary" name="action" value="save">Save</button>
         </div>
     </form>
 
@@ -52,10 +55,10 @@
     </div>
 </div>
 <div th:replace="fragments/footer::footer"></div>
-<script>
+<script th:inline="javascript">
     function openModal(btn) {
         var form = $(btn).parents('form:first');
-        var url = form.attr('action') + "product/fragment/list";
+        var url = form.attr('action') + "/product/fragment/list";
         $(".modal-body").load(url);
     }
 
