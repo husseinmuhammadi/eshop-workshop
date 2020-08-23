@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <div th:replace="fragments/header::head"></div>
+    <th:block th:replace="fragments/header::head"/>
 </head>
 <body>
 <div th:replace="fragments/header::header"></div>
 <div class="container">
     <h1>Cart Entry</h1>
+    <input id="context" type="hidden" th:value="${#request.contextPath}">
     <form th:action="@{/cart/save}" th:object="${cart}" method="post">
         <div class="form-group">
             <label for="username">Username</label>
@@ -20,7 +21,7 @@
         <div class="form-group">
             <label for="product-id">Product</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="product-id" aria-describedby="product-description" placeholder="Product">
+                <input type="text" class="form-control" id="product-id" aria-describedby="product-description" placeholder="Product" th:field="*{product.id}">
                 <div class="input-group-append">
                     <button type="button" class="btn btn-outline-secondary" onclick="openModal(this)" data-toggle="modal" data-target="#exampleModal">Select</button>
                 </div>
@@ -57,8 +58,12 @@
 <div th:replace="fragments/footer::footer"></div>
 <script th:inline="javascript">
     function openModal(btn) {
+        var contextPath = $('#context').val();
+        console.log(contextPath);
         var form = $(btn).parents('form:first');
-        var url = form.attr('action') + "/product/fragment/list";
+        var url1 = form.attr('action');
+        var url = contextPath + "/product/fragment/list";
+        console.log(url);
         $(".modal-body").load(url);
     }
 

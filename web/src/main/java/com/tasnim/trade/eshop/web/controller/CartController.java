@@ -1,44 +1,74 @@
 package com.tasnim.trade.eshop.web.controller;
 
+import com.tasnim.trade.eshop.api.CartService;
 import com.tasnim.trade.eshop.api.UserService;
 import com.tasnim.trade.eshop.dto.Cart;
 import com.tasnim.trade.eshop.type.Principal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartController.class);
+
     @Autowired
-    UserService service;
+    UserService userService;
+
+    @Autowired
+    CartService service;
 
     @GetMapping("/entry")
     public String entry(Model model) {
         Cart cart = new Cart();
-        cart.setUser(service.findByUsername(getLoggedInUser()));
+        cart.setUser(userService.findByUsername(getLoggedInUser()));
         model.addAttribute("cart", cart);
         return "cart/insert";
     }
 
-//    @PostMapping(value = "/save", params = "action=save")
     @PostMapping(value = "/save")
-    public String add(Cart cart, @RequestParam(value="action") String action) {
+    public String add(Cart cart, Model model) {
+        service.save(cart);
+
+        List<Cart> carts = service.findAll();
+        model.addAttribute("carts", carts);
+        return "redirect:/cart/all";
+    }
+
+    @PostMapping(value = "/add")
+    public String add(Model model, @RequestParam("productId") Optional<Long> productId) {
+        LOGGER.info("product id : {}", productId);
+        return "redirect:/cart/all";
+    }
+
+    @PostMapping(value = "/save", params = "action=cancel")
+    public String cancel(Cart cart, @RequestParam(value = "action") String action) {
 
         return "card/index";
     }
 
-    @PostMapping(value = "/save", params = "action=cancel")
-    public String cancel(Cart cart) {
+    @GetMapping("/all")
+    public String all(Model model) {
+        List<Cart> carts = service.findAll();
+        model.addAttribute("carts", carts);
+        return "cart/index";
+    }
 
-        return "card/index";
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id) {
+        LOGGER.info("Remove entity id: {}", id);
+        service.remove(id);
+        return "redirect:/cart/all";
     }
 
     private String getLoggedInUser() {

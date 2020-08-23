@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Entry</title>
-    <div th:replace="fragments/header::head"></div>
+    <th:block th:replace="fragments/header::head"/>
 </head>
 <body>
 <div th:replace="fragments/header::header"></div>
 <div class="container">
-    <h1>Product Entry</h1>
-
-    <form id="form" th:action="@{/}" th:object="${product}" method="post" >
-        <p>
-            Name: <input type="text" th:field="*{productName}">
-        </p>
-        <p>
-            Code: <input type="text" th:field="*{productCode}">
-        </p>
-        <p>
-            Currency: <input type="text" th:field="*{currency}">
-        </p>
-        <p>
-            Price: <input type="number" th:field="*{amount}">
-        </p>
-        <p>
-            <input type="button" value="Add to chart" onclick="addToChart()"/>
-        </p>
+    <h1>Product Profile</h1>
+    <form th:object="${product}" method="post">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="product-name-description">Product Name</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Product Name" aria-describedby="product-name-description" th:field="*{productName}">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="product-code-description">Product Code</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Product Code" aria-describedby="product-code-description" th:field="*{productCode}">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="currency-description">Currency</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Currency" aria-describedby="currency-description" th:field="*{currency}">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="amount-description">Price</span>
+            </div>
+            <span class="form-control" aria-label="Currency" aria-describedby="amount-description" th:text="${#numbers.formatDecimal(product.amount, 0, 'COMMA', 2, 'POINT')}"></span>
+        </div>
+        <div role="group">
+            <button type="button" class="btn btn-primary" th:onclick="'javascript:addToChart(' + ${product.id} + ')'">Add to chart</button>
+        </div>
     </form>
 </div>
 <div th:replace="fragments/footer::footer"></div>
 <script>
-    function addToChart() {
-        var form = $('#form');
-        var url = form.attr('action') + '';
+    function addToChart(productId) {
+        var contextPath = $('#contextPath').val();
+        console.log(contextPath);
+        console.log(productId);
+        var url = contextPath + '/cart/add?' + 'productId=' + productId;
+        $.post(url);
     }
 </script>
 </body>

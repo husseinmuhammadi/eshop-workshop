@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
-    <div th:replace="fragments/header::head"></div>
+    <th:block th:replace="fragments/header::head"/>
 </head>
 <body>
 <div th:replace="fragments/header::header"></div>
@@ -27,7 +27,9 @@
             </tr>
             <tr th:each="product : ${productPage.content}">
                 <th scope="row">
-                    <span th:text="${product.id}"></span>
+                    <a th:href="@{'/product/profile/'+${product.id}}">
+                        <span th:text="${product.id}"></span>
+                    </a>
                 </th>
                 <td>
                     <span th:text="${product.productName}"></span>

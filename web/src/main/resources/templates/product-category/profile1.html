@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}"/>
     <title>Title</title>
-    <div th:replace="fragments/header::head"></div>
+    <th:block th:replace="fragments/header::head"/>
 </head>
 <body>
 <div th:replace="fragments/header::header"></div>
