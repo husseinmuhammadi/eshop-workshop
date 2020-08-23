@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface ProductService {
     Product save(Product product);
 
+
     List<Product> findAll();
 
     Page<Product> findAll(Pageable pageable);
@@ -24,6 +25,8 @@ public interface ProductService {
     void delete(Product product);
 
     List<Product> getTopProducts();
+
+
 
     Optional<Product> findById(Long id);
 }
