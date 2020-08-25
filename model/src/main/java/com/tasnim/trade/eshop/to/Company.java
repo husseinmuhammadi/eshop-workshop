@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "COMPANY", uniqueConstraints = {
         @UniqueConstraint(name = "UQ_COMPANY_NAME", columnNames = {"NAME"})
 })
-@SequenceGenerator(name = "SEQUENCE_GENERATOR", sequenceName = "COMPANY_SEQ")
+@SequenceGenerator(name = EntityBase.SEQUENCE_GENERATOR, sequenceName = "COMPANY_SEQ")
 public class Company extends EntityBase {
 
     @Column(name = "NAME", length = 200, nullable = false)

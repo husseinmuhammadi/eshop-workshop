@@ -11,8 +11,10 @@ import javax.persistence.*;
 @EntityListeners(AuditListener.class)
 public abstract class EntityBase implements Auditable, Printable {
 
+    public static final String SEQUENCE_GENERATOR = "SEQUENCE_GENERATOR";
+
     @Id
-    @GeneratedValue(generator = "SEQUENCE_GENERATOR", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = SEQUENCE_GENERATOR, strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Embedded
