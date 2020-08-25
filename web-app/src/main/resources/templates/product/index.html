@@ -6,7 +6,7 @@
     <th:block th:replace="fragments/header::head"/>
 </head>
 <body>
-<div th:replace="fragments/header::header"></div>
+<th:block th:replace="fragments/header::header"/>
 <div class="container">
     <h1>Products</h1>
     <div class="table-responsive">
@@ -81,8 +81,10 @@
             </ul>
         </nav>
     </div>
-    <p><a th:href="@{/product/entry}">Add</a></p>
+    <div role="group">
+        <a th:href="@{/product/entry}" class="btn-outline-primary">Add</a>
+    </div>
 </div>
-<div th:replace="fragments/footer::footer"></div>
+<th:block th:replace="fragments/footer::footer"/>
 </body>
 </html>

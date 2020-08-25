@@ -16,7 +16,7 @@ public abstract class DtoBase {
         this(new Audit());
     }
 
-    public DtoBase(Long id) {
+    DtoBase(Long id) {
         this(new Audit());
         this.id = id;
     }

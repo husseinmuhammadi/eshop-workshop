@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
-    Product save(Product product);
 
+    Product save(Product product);
 
     List<Product> findAll();
 
@@ -25,8 +25,6 @@ public interface ProductService {
     void delete(Product product);
 
     List<Product> getTopProducts();
-
-
 
     Optional<Product> findById(Long id);
 }
