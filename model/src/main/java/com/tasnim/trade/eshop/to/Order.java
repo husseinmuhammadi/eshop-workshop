@@ -1,9 +1,6 @@
 package com.tasnim.trade.eshop.to;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +10,12 @@ import java.util.Set;
 @SequenceGenerator(name = "SEQUENCE_GENERATOR", sequenceName = "user_order_seq")
 public class Order extends EntityBase {
 
+    @Column(name = "order_date")
     private Date orderDate;
+
+    @ManyToOne
+    @JoinColumn(name = "username", referencedColumnName = "username", foreignKey = @ForeignKey(name = "FK_ORDER_USER"))
+    private User user;
 
     @OneToMany(mappedBy = "order")
     private Set<OrderDetail> orderDetails;
@@ -32,5 +34,13 @@ public class Order extends EntityBase {
 
     public void setOrderDetails(Set<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
