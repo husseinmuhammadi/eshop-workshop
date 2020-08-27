@@ -20,10 +20,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(orderPage.content)}">
+            <tr th:if="${#lists.isEmpty(page.content)}">
                 <td colspan="6">No order available</td>
             </tr>
-            <tr th:each="order : ${orderPage.content}">
+            <tr th:each="order : ${page.content}">
                 <th scope="row">
                     <a th:href="@{'/order/profile/'+${order.id}}">
                         <span th:text="${order.id}"></span>
@@ -44,7 +44,7 @@
 
         <nav aria-label="Navigation">
             <ul class="pagination justify-content-center"
-                th:if="${orderPage.totalPages > 0}">
+                th:if="${page.totalPages > 0}">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -52,10 +52,10 @@
                     </a>
                 </li>
                 <li class="page-item"
-                    th:class="${pageNumber == orderPage.number + 1} ? 'page-item active'"
+                    th:class="${pageNumber == page.number + 1} ? 'page-item active'"
                     th:each="pageNumber : ${pageNumbers}">
                     <a th:class="page-link"
-                       th:href="@{/order/list(size = ${orderPage.size}, page = ${pageNumber})}"
+                       th:href="@{/order/list(size = ${page.size}, page = ${pageNumber})}"
                        th:text="${pageNumber}">
                     </a>
                 </li>

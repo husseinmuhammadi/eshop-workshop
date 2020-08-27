@@ -7,16 +7,14 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderService {
+public interface OrderService extends BaseService<Order> {
     Order save(Order order);
 
     List<Order> findAll();
 
-    Page<Order> findAll(Pageable pageable);
-
     void delete(Long id);
 
-    void delete(Order product);
+    void delete(Order order);
 
     Optional<Order> findById(Long id);
 }
