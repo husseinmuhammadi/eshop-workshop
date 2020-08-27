@@ -82,11 +82,6 @@ public class ProductController extends ControllerBase {
         return "index";
     }
 
-    @ModelAttribute("product")
-    public Product getProduct() {
-        return new Product();
-    }
-
     @Override
     public DtoBase getModel() {
         return new Product();

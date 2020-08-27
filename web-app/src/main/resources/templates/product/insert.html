@@ -10,7 +10,7 @@
 <div class="container">
     <h1>Product Entry</h1>
 
-    <form action="#" th:action="@{/product/save}" th:object="${product}" id="form1" method="post">
+    <form action="#" th:action="@{/product/save}" th:object="${model}" id="form1" method="post">
         <div class="form-group">
             <label for="productName">Name</label>
             <input type="text" class="form-control" id="productName" aria-describedby="productNameDescription" th:field="*{productName}">

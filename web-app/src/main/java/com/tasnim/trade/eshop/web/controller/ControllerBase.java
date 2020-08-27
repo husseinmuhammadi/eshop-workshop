@@ -27,7 +27,7 @@ public abstract class ControllerBase<T extends DtoBase> {
 
     public abstract String insert();
 
-    @GetMapping("/list")
+    @GetMapping("/index")
     public String index(Model model,
                         @RequestParam("page") Optional<Integer> page,
                         @RequestParam("size") Optional<Integer> size) {

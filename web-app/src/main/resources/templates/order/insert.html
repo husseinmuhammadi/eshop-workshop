@@ -10,7 +10,7 @@
 <div class="container">
     <h1>Order Entry</h1>
 
-    <form action="#" th:action="@{/order/save}" th:object="${order}" method="post">
+    <form action="#" th:action="@{/order/save}" th:object="${model}" method="post">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" aria-describedby="username-description" th:field="*{user.username}">

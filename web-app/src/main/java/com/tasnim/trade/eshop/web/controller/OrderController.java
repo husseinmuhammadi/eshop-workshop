@@ -46,9 +46,4 @@ public class OrderController extends ControllerBase {
     public DtoBase getModel() {
         return new Order();
     }
-
-    @ModelAttribute("order")
-    public Order getOrder() {
-        return new Order();
-    }
 }
