@@ -15,6 +15,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Order Date</th>
+                <th scope="col">User</th>
                 <th scope="col">Options</th>
             </tr>
             </thead>
@@ -32,7 +33,10 @@
                     <span th:text="${order.orderDate}"></span>
                 </td>
                 <td>
-                    <a class="btn btn-link" th:href="@{'/product/remove/' + ${order.id}}">Remove</a>
+                    <span th:text="${order.user?.username}"></span>
+                </td>
+                <td>
+                    <a class="btn btn-link" th:href="@{'/order/remove/' + ${order.id}}">Remove</a>
                 </td>
             </tr>
             </tbody>
