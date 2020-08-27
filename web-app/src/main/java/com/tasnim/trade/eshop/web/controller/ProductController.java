@@ -1,22 +1,17 @@
 package com.tasnim.trade.eshop.web.controller;
 
-import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.api.ProductService;
+import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.dto.Product;
 import com.tasnim.trade.eshop.dto.ProductCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @RequestMapping("/product")
 @Controller
@@ -93,4 +88,11 @@ public class ProductController extends ControllerBase {
         });
         return "product/profile";
     }
+
+    @PostMapping("/test")
+    public String test(@RequestBody String product) {
+        LOGGER.info("product : {}", product);
+        return "index";
+    }
 }
+

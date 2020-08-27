@@ -8,4 +8,7 @@ public interface Service<T extends DtoBase> {
 
     Page<T> findAll(Pageable pageable);
 
+    T save(T dto);
+
+    void delete(Long id);
 }

@@ -10,7 +10,7 @@
 <div class="container">
     <h1>Product Entry</h1>
 
-    <form action="#" th:action="@{/product/save}" th:object="${product}" method="post">
+    <form action="#" th:action="@{/product/save}" th:object="${product}" id="form1" method="post">
         <div class="form-group">
             <label for="productName">Name</label>
             <input type="text" class="form-control" id="productName" aria-describedby="productNameDescription" th:field="*{productName}">
@@ -41,10 +41,20 @@
         </div>
         <div role="group">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-outline-secondary" id="test">Test</button>
             <a class="btn btn-outline-secondary" th:href="@{/product/list}">Cancel</a>
         </div>
     </form>
 </div>
-<div th:replace="fragments/footer::footer"></div>
+<th:block th:replace="fragments/footer::footer"/>
+<script>
+    $("#test").on("click", function (e) {
+        e.preventDefault();
+        var contextPath = $('#contextPath').val();
+        console.log(contextPath);
+        var url = contextPath + "/product/test";
+        $('#form1').attr('action', url).submit();
+    });
+</script>
 </body>
 </html>

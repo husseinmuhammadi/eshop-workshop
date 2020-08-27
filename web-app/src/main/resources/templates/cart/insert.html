@@ -58,7 +58,7 @@
 <div th:replace="fragments/footer::footer"></div>
 <script th:inline="javascript">
     function openModal(btn) {
-        var contextPath = $('#context').val();
+        var contextPath = $('#contextPath').val();
         console.log(contextPath);
         var form = $(btn).parents('form:first');
         var url1 = form.attr('action');
