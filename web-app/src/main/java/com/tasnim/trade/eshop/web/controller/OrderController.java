@@ -19,14 +19,6 @@ public class OrderController extends ControllerBase {
     @Autowired
     OrderService service;
 
-
-
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable Long id) {
-        service.delete(id);
-        return "redirect:/order/list";
-    }
-
     @Override
     public Service getService() {
         return service;

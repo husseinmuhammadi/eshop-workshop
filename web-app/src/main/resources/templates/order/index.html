@@ -36,7 +36,9 @@
                     <span th:text="${order.user?.username}"></span>
                 </td>
                 <td>
-                    <a class="btn btn-link" th:href="@{'/order/remove/' + ${order.id}}">Remove</a>
+                    <div th:with="deleteUrl='/order/remove/' + ${order.id}">
+                        <a class="btn btn-link" th:href="@{${deleteUrl}(size = ${page.size}, page = ${page.number + 1})}">Remove</a>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -55,7 +57,7 @@
                     th:class="${pageNumber == page.number + 1} ? 'page-item active'"
                     th:each="pageNumber : ${pageNumbers}">
                     <a th:class="page-link"
-                       th:href="@{/order/list(size = ${page.size}, page = ${pageNumber})}"
+                       th:href="@{/order/index(size = ${page.size}, page = ${pageNumber})}"
                        th:text="${pageNumber}">
                     </a>
                 </li>

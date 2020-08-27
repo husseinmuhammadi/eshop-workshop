@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,4 +60,15 @@ public abstract class ControllerBase<T extends DtoBase> {
 
     @ModelAttribute("model")
     public abstract DtoBase getModel();
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id,
+                         @RequestParam("page") Optional<Integer> page,
+                         @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(5);
+
+        getService().delete(id);
+        return "redirect:/" + index() + "?size=" + pageSize + "&page=" + currentPage;
+    }
 }

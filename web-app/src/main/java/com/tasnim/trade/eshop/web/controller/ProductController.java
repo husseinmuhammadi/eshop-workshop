@@ -38,13 +38,6 @@ public class ProductController extends ControllerBase {
         return "product/insert";
     }
 
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable Long id) {
-        LOGGER.info("Remove entity id: {}", id);
-        service.delete(id);
-        return "redirect:/product/list";
-    }
-
     @PostMapping("/remove")
     public String remove(@ModelAttribute(value = "selectedItem") Product product) {
         LOGGER.info("Remove entity entity-id: {}", product.getId());
