@@ -1,7 +1,7 @@
 package com.tasnim.trade.eshop.web.controller;
 
-import com.tasnim.trade.eshop.api.BaseService;
-import com.tasnim.trade.eshop.dto.Order;
+import com.tasnim.trade.eshop.api.Service;
+import com.tasnim.trade.eshop.dto.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ public abstract class ControllerBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerBase.class);
 
-    public abstract BaseService getService();
+    public abstract Service getService();
 
     public abstract String index();
 

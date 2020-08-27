@@ -1,5 +1,6 @@
 package com.tasnim.trade.eshop.web.controller;
 
+import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.api.ProductService;
 import com.tasnim.trade.eshop.dto.Product;
 import com.tasnim.trade.eshop.dto.ProductCategory;
@@ -19,31 +20,20 @@ import java.util.stream.IntStream;
 
 @RequestMapping("/product")
 @Controller
-public class ProductController {
+public class ProductController extends ControllerBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     ProductService service;
 
-    @GetMapping("/list")
-    public String index(Model model,
-                        @RequestParam("page") Optional<Integer> page,
-                        @RequestParam("size") Optional<Integer> size) {
-        LOGGER.info("Show all products");
+    @Override
+    public Service getService() {
+        return service;
+    }
 
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-
-        Page<Product> productPage = service.findAll(PageRequest.of(currentPage - 1, pageSize));
-        model.addAttribute("productPage", productPage);
-        int totalPages = productPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream
-                    .rangeClosed(1, totalPages)
-                    .boxed().collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
+    @Override
+    public String index() {
         return "product/index";
     }
 

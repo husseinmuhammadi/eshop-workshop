@@ -22,10 +22,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(productPage.content)}">
+            <tr th:if="${#lists.isEmpty(page.content)}">
                 <td colspan="6">No product available</td>
             </tr>
-            <tr th:each="product : ${productPage.content}">
+            <tr th:each="product : ${page.content}">
                 <th scope="row">
                     <a th:href="@{'/product/profile/'+${product.id}}">
                         <span th:text="${product.id}"></span>
@@ -57,7 +57,7 @@
 
         <nav aria-label="Navigation">
             <ul class="pagination justify-content-center"
-                th:if="${productPage.totalPages > 0}">
+                th:if="${page.totalPages > 0}">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -65,10 +65,10 @@
                     </a>
                 </li>
                 <li class="page-item"
-                    th:class="${pageNumber == productPage.number + 1} ? 'page-item active'"
+                    th:class="${pageNumber == page.number + 1} ? 'page-item active'"
                     th:each="pageNumber : ${pageNumbers}">
                     <a th:class="page-link"
-                       th:href="@{/product/list(size = ${productPage.size}, page = ${pageNumber})}"
+                       th:href="@{/product/list(size = ${page.size}, page = ${pageNumber})}"
                        th:text="${pageNumber}">
                     </a>
                 </li>

@@ -1,21 +1,14 @@
 package com.tasnim.trade.eshop.web.controller;
 
-import com.tasnim.trade.eshop.api.BaseService;
+import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.api.OrderService;
 import com.tasnim.trade.eshop.dto.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @RequestMapping("/order")
 @Controller
@@ -47,7 +40,7 @@ public class OrderController extends ControllerBase {
     }
 
     @Override
-    public BaseService getService() {
+    public Service getService() {
         return service;
     }
 

@@ -8,13 +8,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductService {
+public interface ProductService extends Service<Product> {
 
     Product save(Product product);
 
     List<Product> findAll();
 
-    Page<Product> findAll(Pageable pageable);
+
 
     Page<Product> findAllByCategory(ProductCategory productCategory, Pageable pageable);
 
