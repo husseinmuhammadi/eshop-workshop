@@ -32,9 +32,8 @@ public class ProductController extends ControllerBase {
         return "product/index";
     }
 
-    @GetMapping("/entry")
-    public String entry(Model model) {
-        model.addAttribute("product", new Product());
+    @Override
+    public String insert() {
         return "product/insert";
     }
 
@@ -90,9 +89,14 @@ public class ProductController extends ControllerBase {
     }
 
     @PostMapping("/test")
-    public String test(@RequestBody String product) {
+    public String test(@ModelAttribute Product product) {
         LOGGER.info("product : {}", product);
         return "index";
+    }
+
+    @ModelAttribute("product")
+    public Product getProduct(){
+        return new Product();
     }
 }
 

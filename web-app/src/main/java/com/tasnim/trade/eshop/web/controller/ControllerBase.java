@@ -22,12 +22,16 @@ public abstract class ControllerBase<T extends DtoBase> {
     public abstract Service<T> getService();
 
     public abstract String index();
+    public abstract String insert();
 
     @GetMapping("/list")
     public String index(Model model,
                         @RequestParam("page") Optional<Integer> page,
                         @RequestParam("size") Optional<Integer> size) {
 
+        LOGGER.info("ControllerBase#index");
+        LOGGER.info("page: {}", page);
+        LOGGER.info("size: {}", size);
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(5);
 
@@ -42,4 +46,12 @@ public abstract class ControllerBase<T extends DtoBase> {
         }
         return index();
     }
+
+    @GetMapping("/entry")
+    public String entry() {
+        return insert();
+    }
+
+
+
 }
