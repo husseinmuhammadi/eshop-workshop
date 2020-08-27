@@ -2,6 +2,7 @@ package com.tasnim.trade.eshop.web.controller;
 
 import com.tasnim.trade.eshop.api.ProductService;
 import com.tasnim.trade.eshop.api.Service;
+import com.tasnim.trade.eshop.dto.DtoBase;
 import com.tasnim.trade.eshop.dto.Product;
 import com.tasnim.trade.eshop.dto.ProductCategory;
 import org.slf4j.Logger;
@@ -35,19 +36,6 @@ public class ProductController extends ControllerBase {
     @Override
     public String insert() {
         return "product/insert";
-    }
-
-    @PostMapping("/save")
-    public String save(Product product) {
-        try {
-            LOGGER.info("Saving product");
-            Product product1 = service.save(product);
-            LOGGER.info("Product {} saved successfully!", product1.getId());
-            return "redirect:/product/list";
-        } catch (Exception e) {
-            LOGGER.error("Error during saving product", e);
-            return null;
-        }
     }
 
     @GetMapping("/remove/{id}")
@@ -95,7 +83,12 @@ public class ProductController extends ControllerBase {
     }
 
     @ModelAttribute("product")
-    public Product getProduct(){
+    public Product getProduct() {
+        return new Product();
+    }
+
+    @Override
+    public DtoBase getModel() {
         return new Product();
     }
 }

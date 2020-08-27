@@ -2,6 +2,7 @@ package com.tasnim.trade.eshop.web.controller;
 
 import com.tasnim.trade.eshop.api.OrderService;
 import com.tasnim.trade.eshop.api.Service;
+import com.tasnim.trade.eshop.dto.DtoBase;
 import com.tasnim.trade.eshop.dto.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +19,7 @@ public class OrderController extends ControllerBase {
     @Autowired
     OrderService service;
 
-    @PostMapping("/save")
-    public String save(Order order) {
-        Order order1 = service.save(order);
-        return "redirect:/order/list";
-    }
+
 
     @GetMapping("/remove/{id}")
     public String remove(@PathVariable Long id) {
@@ -43,6 +40,11 @@ public class OrderController extends ControllerBase {
     @Override
     public String insert() {
         return "order/insert";
+    }
+
+    @Override
+    public DtoBase getModel() {
+        return new Order();
     }
 
     @ModelAttribute("order")

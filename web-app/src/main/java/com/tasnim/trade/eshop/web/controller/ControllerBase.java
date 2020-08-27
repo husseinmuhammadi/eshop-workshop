@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public abstract class ControllerBase<T extends DtoBase> {
     public abstract Service<T> getService();
 
     public abstract String index();
+
     public abstract String insert();
 
     @GetMapping("/list")
@@ -52,6 +55,12 @@ public abstract class ControllerBase<T extends DtoBase> {
         return insert();
     }
 
+    @PostMapping("/save")
+    public String save(@ModelAttribute("model") T entity) {
+        getService().save(entity);
+        return "redirect:/" + index();
+    }
 
-
+    @ModelAttribute("model")
+    public abstract DtoBase getModel();
 }
