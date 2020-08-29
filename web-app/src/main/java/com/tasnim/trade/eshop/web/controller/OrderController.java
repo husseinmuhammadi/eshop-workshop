@@ -35,6 +35,11 @@ public class OrderController extends ControllerBase {
     }
 
     @Override
+    public String all() {
+        return null;
+    }
+
+    @Override
     public DtoBase getModel() {
         return new Order();
     }

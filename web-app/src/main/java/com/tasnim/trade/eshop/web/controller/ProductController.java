@@ -38,6 +38,11 @@ public class ProductController extends ControllerBase {
         return "product/insert";
     }
 
+    @Override
+    public String all() {
+        return null;
+    }
+
     @PostMapping("/remove")
     public String remove(@ModelAttribute(value = "selectedItem") Product product) {
         LOGGER.info("Remove entity entity-id: {}", product.getId());
@@ -52,7 +57,7 @@ public class ProductController extends ControllerBase {
     }
 
     @GetMapping("/fragment/list")
-    public String all(Model model) {
+    public String modal(Model model) {
         model.addAttribute("products", service.findAll());
         return "fragments/product-modal :: product-select";
     }
@@ -67,12 +72,6 @@ public class ProductController extends ControllerBase {
             }
         });
         return "product/profile";
-    }
-
-    @PostMapping("/test")
-    public String test(@ModelAttribute Product product) {
-        LOGGER.info("product : {}", product);
-        return "index";
     }
 
     @Override

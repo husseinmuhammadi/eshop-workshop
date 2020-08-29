@@ -2,10 +2,13 @@ package com.tasnim.trade.eshop.web.controller;
 
 import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.dto.DtoBase;
+import com.tasnim.trade.eshop.type.Principal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +26,8 @@ public abstract class ControllerBase<T extends DtoBase> {
     public abstract String index();
 
     public abstract String insert();
+
+    public abstract String all();
 
     @GetMapping("/index")
     public String index(Model model,
@@ -70,5 +75,22 @@ public abstract class ControllerBase<T extends DtoBase> {
 
         getService().delete(id);
         return "redirect:/" + index() + "?size=" + pageSize + "&page=" + currentPage;
+    }
+
+    String getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() != null) {
+            if (authentication.getPrincipal() instanceof Principal) {
+                Principal principal = (Principal) authentication.getPrincipal();
+                return principal.getUsername();
+            }
+        }
+        return null;
+    }
+
+    @GetMapping("/all")
+    public String all(Model model) {
+        model.addAttribute("list", getService().findAll());
+        return all();
     }
 }

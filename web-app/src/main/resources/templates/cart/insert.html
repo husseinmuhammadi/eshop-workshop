@@ -9,8 +9,7 @@
 <div th:replace="fragments/header::header"></div>
 <div class="container">
     <h1>Cart Entry</h1>
-    <input id="context" type="hidden" th:value="${#request.contextPath}">
-    <form th:action="@{/cart/save}" th:object="${cart}" method="post">
+    <form th:action="@{/cart/save}" th:object="${model}" method="post">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" aria-describedby="username-description" placeholder="Username" th:field="*{user.username}">

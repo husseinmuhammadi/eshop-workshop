@@ -5,6 +5,8 @@ import com.tasnim.trade.eshop.dto.Cart;
 import com.tasnim.trade.eshop.mapper.CardMapper;
 import com.tasnim.trade.eshop.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,18 @@ public class CartServiceImpl implements CartService {
     CartRepository repository;
 
     @Override
+    public Page<Cart> findAll(Pageable pageable) {
+        return null;
+    }
+
+    @Override
     public Cart save(Cart cart) {
         return mapper.fromCart(repository.save(mapper.toCart(cart)));
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 
     @Override
@@ -32,10 +44,5 @@ public class CartServiceImpl implements CartService {
     @Override
     public void remove(Cart cart){
         repository.delete(mapper.toCart(cart));
-    }
-
-    @Override
-    public void remove(Long id) {
-        repository.deleteById(id);
     }
 }

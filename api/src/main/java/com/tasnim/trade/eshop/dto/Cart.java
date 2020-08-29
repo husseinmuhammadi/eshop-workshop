@@ -1,20 +1,17 @@
 package com.tasnim.trade.eshop.dto;
 
-public class Cart {
+public class Cart extends DtoBase {
 
-    Long id;
+    public Cart() {
+    }
+
+    public Cart(Long id) {
+        super(id);
+    }
 
     Product product;
 
     User user;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Product getProduct() {
         return product;

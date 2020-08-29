@@ -4,12 +4,9 @@ import com.tasnim.trade.eshop.dto.Cart;
 
 import java.util.List;
 
-public interface CartService {
-    Cart save(Cart cart);
+public interface CartService extends Service<Cart> {
 
-    List<Cart> findAll();
 
     void remove(Cart cart);
 
-    void remove(Long id);
 }

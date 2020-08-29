@@ -21,10 +21,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(carts)}">
+            <tr th:if="${#lists.isEmpty(list)}">
                 <td colspan="6">No cart available</td>
             </tr>
-            <tr th:each="cart : ${carts}">
+            <tr th:each="cart : ${list}">
                 <th scope="row">
                     <span th:text="${cart.id}"></span>
                 </th>
