@@ -12,6 +12,8 @@ public class OrderDetail extends DtoBase {
 
     private Date registerDate;
 
+    Integer count;
+
     public Product getProduct() {
         return product;
     }
@@ -42,5 +44,13 @@ public class OrderDetail extends DtoBase {
 
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -1,5 +1,6 @@
 package com.tasnim.trade.eshop.service.base;
 
+import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.dto.DtoBase;
 import com.tasnim.trade.eshop.to.EntityBase;
 import org.springframework.core.convert.converter.Converter;
@@ -12,7 +13,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class GeneralServiceImpl<T extends EntityBase, R extends DtoBase> {
+public abstract class GeneralServiceImpl<T extends EntityBase, R extends DtoBase> implements Service<R> {
 
     public abstract JpaRepository<T, Long> getRepository();
 

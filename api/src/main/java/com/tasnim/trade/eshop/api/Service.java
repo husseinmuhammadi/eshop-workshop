@@ -14,9 +14,11 @@ public interface Service<T extends DtoBase> {
 
     List<T> findAll();
 
-    T save(T dto);
+    T save(T entity);
 
     void delete(Long id);
+
+    void delete(T entity);
 
     Optional<T> findById(Long id);
 }
