@@ -45,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findAll(Pageable pageable) {
-        Converter<com.tasnim.trade.eshop.to.Product, com.tasnim.trade.eshop.dto.Product> converter = product -> mapper.fromProduct(product);
+        Converter<com.tasnim.trade.eshop.to.Product, com.tasnim.trade.eshop.dto.Product> converter = mapper::fromProduct;
         return repository.findAll(pageable).map(converter::convert);
     }
 
