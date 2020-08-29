@@ -1,12 +1,10 @@
 package com.tasnim.trade.eshop.mapper;
 
-import com.tasnim.trade.eshop.to.Product;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = {ProductMapper.class})
-public interface CardMapper {
+public interface CartMapper {
 
     com.tasnim.trade.eshop.dto.Cart fromCart(com.tasnim.trade.eshop.to.Cart cart);
 

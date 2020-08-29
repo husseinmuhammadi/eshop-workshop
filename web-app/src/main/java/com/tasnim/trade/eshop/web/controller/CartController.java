@@ -28,7 +28,6 @@ public class CartController extends ControllerBase<Cart> {
     @Autowired
     CartService service;
 
-
     @PostMapping(value = "/add")
     public String add(Model model, @RequestParam("productId") Optional<Long> productId) {
         LOGGER.info("product id : {}", productId);
@@ -37,10 +36,8 @@ public class CartController extends ControllerBase<Cart> {
 
     @PostMapping(value = "/save", params = "action=cancel")
     public String cancel(Cart cart, @RequestParam(value = "action") String action) {
-
         return "card/index";
     }
-
 
     @Override
     public Service getService() {
