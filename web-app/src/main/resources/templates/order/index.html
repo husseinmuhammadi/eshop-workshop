@@ -30,7 +30,7 @@
                     </a>
                 </th>
                 <td>
-                    <span th:text="${order.orderDate}"></span>
+                    <span th:text="${#dates.format(order.orderDate, 'dd-MMM-yyyy')}"></span>
                 </td>
                 <td>
                     <span th:text="${order.user?.username}"></span>
