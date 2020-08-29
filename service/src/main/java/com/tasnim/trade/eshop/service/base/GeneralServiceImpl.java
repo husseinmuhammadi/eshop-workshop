@@ -56,5 +56,9 @@ public abstract class GeneralServiceImpl<T extends EntityBase, R extends DtoBase
     public Optional<R> findById(Long id) {
         return getRepository().findById(id).map(mapper::fromEntity);
     }
+
+    public Mapper<T, R> getMapper() {
+        return mapper;
+    }
 }
 
