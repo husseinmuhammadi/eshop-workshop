@@ -21,10 +21,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${#lists.isEmpty(list)}">
+            <tr th:if="${#lists.isEmpty(carts)}">
                 <td colspan="6">No cart available</td>
             </tr>
-            <tr th:each="cart : ${list}">
+            <tr th:each="cart : ${carts}">
                 <th scope="row">
                     <span th:text="${cart.id}"></span>
                 </th>
@@ -45,7 +45,7 @@
         </table>
     </div>
     <div role="group">
-        <a th:href="@{/cart/entry}">Add</a>
+        <a class="btn btn-outline-primary" th:href="@{/cart/entry}">Add</a>
     </div>
 </div>
 <div th:replace="fragments/footer::footer"></div>

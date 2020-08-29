@@ -43,6 +43,11 @@ public class ProductController extends ControllerBase {
         return null;
     }
 
+    @Override
+    public String profile() {
+        return "product/profile";
+    }
+
     @PostMapping("/remove")
     public String remove(@ModelAttribute(value = "selectedItem") Product product) {
         LOGGER.info("Remove entity entity-id: {}", product.getId());
@@ -62,21 +67,19 @@ public class ProductController extends ControllerBase {
         return "fragments/product-modal :: product-select";
     }
 
-    @GetMapping("/profile/{id}")
-    public String profile(Model model, @PathVariable Long id) {
-        Optional<Product> optional = service.findById(id);
-        optional.ifPresentOrElse(product -> model.addAttribute("product", product), new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-        return "product/profile";
-    }
-
     @Override
     public DtoBase getModel() {
         return new Product();
+    }
+
+    @Override
+    public String getIndividualModel() {
+        return "product";
+    }
+
+    @Override
+    public String getCollectionModel() {
+        return "products";
     }
 }
 

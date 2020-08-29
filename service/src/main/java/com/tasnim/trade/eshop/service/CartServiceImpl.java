@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,12 +38,17 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Optional<Cart> findById(Long id) {
+        return repository.findById(id).map(mapper::fromCart);
+    }
+
+    @Override
     public List<Cart> findAll() {
         return repository.findAll().stream().map(mapper::fromCart).collect(Collectors.toList());
     }
 
     @Override
-    public void remove(Cart cart){
+    public void remove(Cart cart) {
         repository.delete(mapper.toCart(cart));
     }
 }

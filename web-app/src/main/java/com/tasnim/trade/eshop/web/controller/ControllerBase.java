@@ -3,6 +3,7 @@ package com.tasnim.trade.eshop.web.controller;
 import com.tasnim.trade.eshop.api.Service;
 import com.tasnim.trade.eshop.dto.DtoBase;
 import com.tasnim.trade.eshop.type.Principal;
+import com.tasnim.trade.eshop.web.view.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,17 +18,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public abstract class ControllerBase<T extends DtoBase> {
+public abstract class ControllerBase<T extends DtoBase> implements View {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerBase.class);
 
     public abstract Service<T> getService();
-
-    public abstract String index();
-
-    public abstract String insert();
-
-    public abstract String all();
 
     @GetMapping("/index")
     public String index(Model model,
@@ -90,7 +85,17 @@ public abstract class ControllerBase<T extends DtoBase> {
 
     @GetMapping("/all")
     public String all(Model model) {
-        model.addAttribute("list", getService().findAll());
+        model.addAttribute(getCollectionModel(), getService().findAll());
         return all();
     }
+
+    @GetMapping("/profile/{id}")
+    public String profile(Model model, @PathVariable Long id) {
+        Optional<T> optional = getService().findById(id);
+        optional.ifPresent(entity -> model.addAttribute(getIndividualModel(), entity));
+        return profile();
+    }
+
+    public abstract String getIndividualModel();
+    public abstract String getCollectionModel();
 }

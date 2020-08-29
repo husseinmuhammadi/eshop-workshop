@@ -63,10 +63,24 @@ public class CartController extends ControllerBase<Cart> {
     }
 
     @Override
+    public String profile() {
+        return "card/profile";
+    }
+
+    @Override
     public DtoBase getModel() {
         Cart cart = new Cart();
         cart.setUser(userService.findByUsername(getLoggedInUser()));
         return cart;
+    }
 
+    @Override
+    public String getIndividualModel() {
+        return "cart";
+    }
+
+    @Override
+    public String getCollectionModel() {
+        return "carts";
     }
 }

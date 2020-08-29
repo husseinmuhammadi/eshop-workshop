@@ -26,5 +26,4 @@ public interface ProductService extends Service<Product> {
 
     List<Product> getTopProducts();
 
-    Optional<Product> findById(Long id);
 }

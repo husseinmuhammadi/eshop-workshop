@@ -40,7 +40,22 @@ public class OrderController extends ControllerBase {
     }
 
     @Override
+    public String profile() {
+        return "order/profile";
+    }
+
+    @Override
     public DtoBase getModel() {
         return new Order();
+    }
+
+    @Override
+    public String getIndividualModel() {
+        return "order";
+    }
+
+    @Override
+    public String getCollectionModel() {
+        return "orders";
     }
 }
