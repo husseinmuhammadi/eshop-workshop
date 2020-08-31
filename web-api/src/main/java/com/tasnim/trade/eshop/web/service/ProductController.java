@@ -2,11 +2,11 @@ package com.tasnim.trade.eshop.web.service;
 
 import com.tasnim.trade.eshop.api.ProductCategoryService;
 import com.tasnim.trade.eshop.api.ProductService;
-import com.tasnim.trade.eshop.dto.*;
+import com.tasnim.trade.eshop.dto.Product;
+import com.tasnim.trade.eshop.dto.ProductCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Response> index(@RequestParam("productCategoryName") Optional<String> productCategoryName) {
+    public ResponseEntity<List<Product>> index(@RequestParam("productCategoryName") Optional<String> productCategoryName) {
         List<Product> products = Collections.emptyList();
         if (productCategoryName.isPresent()) {
             Optional<ProductCategory> productCategory = productCategoryService.findByName(productCategoryName.get());
@@ -39,26 +39,22 @@ public class ProductController {
                 products = service.findAllByCategory(productCategory.get());
             }
         }
-        ProductPackage productPackage = new ProductPackage(products);
-        return new ResponseEntity<>(new SuccessfulResponse<>(productPackage), HttpStatus.OK);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/top")
-    public ResponseEntity<Response> getTopProducts() {
-        List<Product> products = service.getTopProducts();
-        return new ResponseEntity<>(new SuccessfulResponse<>(products), HttpStatus.OK);
+    public ResponseEntity<List<Product>> getTopProducts() {
+        return ResponseEntity.ok(service.getTopProducts());
     }
 
     @GetMapping("/festival")
-    public ResponseEntity<Response> getFestivalProducts() {
-        List<Product> products = service.getTopProducts();
-        return new ResponseEntity<>(new SuccessfulResponse<>(products), HttpStatus.OK);
+    public ResponseEntity<List<Product>> getFestivalProducts() {
+        return ResponseEntity.ok(service.getTopProducts());
     }
 
     @PostMapping
-    public ResponseEntity<Response> save(@RequestBody Product product) {
-        Product product1 = service.save(product);
-        return ResponseEntity.ok(new SuccessfulResponse<>(product1));
+    public ResponseEntity<Product> save(@RequestBody Product product) {
+        return ResponseEntity.ok(service.save(product));
     }
 
     @GetMapping("/{id}")
