@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/api/v1/productCategories")
 @RestController
-public class ProductCategoryRestfulService {
+public class ProductCategoryController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductCategoryRestfulService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductCategoryController.class);
 
     private final ProductCategoryService service;
 
-    public ProductCategoryRestfulService(ProductCategoryService service) {
+    public ProductCategoryController(ProductCategoryService service) {
         this.service = service;
     }
 

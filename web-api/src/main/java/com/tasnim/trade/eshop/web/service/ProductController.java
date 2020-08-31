@@ -17,16 +17,16 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping("/api/v1/products")
 @RestController
-public class ProductRestfulService {
+public class ProductController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductRestfulService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService service;
 
     @Autowired
     private ProductCategoryService productCategoryService;
 
-    public ProductRestfulService(ProductService service) {
+    public ProductController(ProductService service) {
         this.service = service;
     }
 

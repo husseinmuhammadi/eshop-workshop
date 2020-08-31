@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/api/v1/orders")
 @RestController
-public class OrderRestfulService {
+public class OrderController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(OrderRestfulService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
 
 }
