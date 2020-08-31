@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserRestfulService {
+public class UserController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(UserRestfulService.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserService service;
