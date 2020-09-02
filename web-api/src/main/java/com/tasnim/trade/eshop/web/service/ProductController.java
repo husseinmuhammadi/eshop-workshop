@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api")
 @RestController
 public class ProductController {
 
@@ -30,7 +30,7 @@ public class ProductController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/v1/products")
     public ResponseEntity<List<Product>> index(@RequestParam("productCategoryName") Optional<String> productCategoryName) {
         List<Product> products = Collections.emptyList();
         if (productCategoryName.isPresent()) {
@@ -42,13 +42,13 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/top")
-    public ResponseEntity<List<Product>> getTopProducts() {
+    @GetMapping("/v1/products/top")
+    public ResponseEntity<List<Product>> top() {
         return ResponseEntity.ok(service.getTopProducts());
     }
 
-    @GetMapping("/festival")
-    public ResponseEntity<List<Product>> getFestivalProducts() {
+    @GetMapping("/v1/products/festival")
+    public ResponseEntity<List<Product>> festival() {
         return ResponseEntity.ok(service.getTopProducts());
     }
 
@@ -57,9 +57,13 @@ public class ProductController {
         return ResponseEntity.ok(service.save(product));
     }
 
-    @GetMapping("/{id}")
-    public Optional<Product> find(@PathVariable() Long id) {
-        LOGGER.info("Get product, Id: {}", id);
-        return service.findById(id);
+    @GetMapping("/v1/products/{id}")
+    public ResponseEntity<Optional<Product>> find(@PathVariable() Long id, @RequestParam("detail") Optional<Boolean> detail) {
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @GetMapping("/v1/products/{id}/related")
+    public ResponseEntity<List<Product>> related(@PathVariable() Long id) {
+        return ResponseEntity.ok(service.findAll());
     }
 }
