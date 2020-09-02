@@ -28,7 +28,7 @@
         <module>../model</module>
         <module>../api</module>
         <module>../service</module>
-        <module>../web-app</module>
+        <module>../web-api</module>
     </modules>
 
     <build>
