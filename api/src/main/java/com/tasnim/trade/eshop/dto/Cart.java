@@ -1,5 +1,9 @@
 package com.tasnim.trade.eshop.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Cart extends DtoBase {
 
     public Cart() {
@@ -12,6 +16,11 @@ public class Cart extends DtoBase {
     Product product;
 
     User user;
+
+    Integer count;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    Date registerDate;
 
     public Product getProduct() {
         return product;
@@ -27,5 +36,21 @@ public class Cart extends DtoBase {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 }

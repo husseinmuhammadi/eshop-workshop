@@ -52,7 +52,7 @@ public class ProductController {
         return ResponseEntity.ok(service.getTopProducts());
     }
 
-    @PostMapping
+    @PostMapping("/v1/products")
     public ResponseEntity<Product> save(@RequestBody Product product) {
         return ResponseEntity.ok(service.save(product));
     }
