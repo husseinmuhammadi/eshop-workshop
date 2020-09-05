@@ -1,9 +1,11 @@
 package com.tasnim.trade.eshop.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@JsonDeserialize(using = CartDeserializer.class)
 public class Cart extends DtoBase {
 
     public Cart() {
